@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
   belongs_to :user
-  
+
   has_many :ticket_types
 
   validates :ticket_types, :length => { :minimum => 1 }
@@ -13,4 +13,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :ticket_types, allow_destroy: true
   accepts_nested_attributes_for :venue
 
+  def self.upcoming_events
+  	where("starts_at > ? AND published = ?", Time.now, true)
+  end
 end

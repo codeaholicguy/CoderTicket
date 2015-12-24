@@ -8,10 +8,10 @@
 </div>
 
 <div class="container-fluid events-list">
-    <% @events.in_groups_of(3) do |g| %>
+    <% current_user.events.in_groups_of(3) do |g| %>
       <div class="row">
         <% g.compact.each do |e| %>
-            <%= render partial: 'event', locals: {event: e} %>
+            <%= render partial: 'my_event', locals: {event: e} %>
         <% end %>
       </div>
     <% end %>
