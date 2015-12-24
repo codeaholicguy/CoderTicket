@@ -1,8 +1,11 @@
 <% if user_signed_in? %>
-  <li class="nav-item"><a href="#" class="nav-link">Hello <%= current_user.try("email") %></a></li>
-  <li class="nav-item"><%= link_to 'Edit account', edit_user_registration_path, class: 'nav-link' %></li>
+  <li class="nav-item">
+     <%= link_to 'Create event', new_event_path, class: 'btn btn-success nav-link' %>
+  </li>
+  <li class="nav-item"><%= link_to 'Hello ' + truncate(current_user.try("name") || current_user.try("email"), length: 20), edit_user_registration_path, class: 'nav-link' %></li>
   <li class="nav-item"><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete', class: 'nav-link' %></li>
 <% else %>
+  <li class="nav-item"><%= link_to 'Sign in with facebook',  user_omniauth_authorize_path(:facebook), class: 'btn btn-primary nav-link' %></li>
   <li class="nav-item"><%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %></li>
   <li class="nav-item"><%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %></li>
 <% end %>

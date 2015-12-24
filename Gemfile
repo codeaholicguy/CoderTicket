@@ -34,6 +34,9 @@ gem 'font-awesome-rails'
 gem 'simplecov', :require => false, :group => :test
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem "nested_form"
 
 # Use Unicorn as the app server
 # gem 'unicorn'

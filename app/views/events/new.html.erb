@@ -1,0 +1,40 @@
+<div class="container after-nav">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <h2>Create new event</h2>
+
+      <%= simple_nested_form_for (@event) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <h3>Event infomation</h3>
+          <%= f.input :name, required: true, autofocus: true %>
+          <%= f.input :starts_at, required: true, :as => :datetime_picker %>
+          <%= f.input :ends_at, required: true, :as => :datetime_picker %>
+          <%= f.input :hero_image_url, required: true %>
+          <%= f.input :extended_html_description, required: true %>
+          <%= f.input :category_id, required: true, collection: Category.all, default: 1 %>
+
+          <h3>Venue</h3>
+          <%= f.simple_fields_for :venue, required: false do |v| %>
+            <%= v.input :name %>
+            <%= v.input :region_id, collection: Region.all, default: 1 %>
+          <% end %>
+
+          <h3>Ticket types</h3>
+          <%= f.simple_fields_for :ticket_types, required: true do |tt| %>
+            <%= tt.input :name %>
+      			<%= tt.input :price %>
+            <%= tt.input :max_quantity %>
+            <%= tt.link_to_remove "Remove" %>
+        	<% end %>
+          <%= f.link_to_add "Add ticket type", :ticket_types %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Create" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

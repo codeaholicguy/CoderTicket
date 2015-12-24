@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/derekprior/momentjs-rails.git
+  revision: 3d35d16b03dc2a19658f3e26a37bb3d09fb38d9a
+  specs:
+    momentjs-rails (2.10.6)
+      railties (>= 3.1)
+
+GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: 36d21cec5da7f5b214925804f60e63c61c747023
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (4.7.16)
+      momentjs-rails (>= 2.9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +116,7 @@ GEM
     minitest (5.8.3)
     multi_json (1.11.2)
     multipart-post (2.0.0)
+    nested_form (0.3.2)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (0.8.1)
@@ -203,10 +220,13 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha1)
   byebug
   coffee-rails (~> 4.1.0)
+  datetimepicker-rails!
   devise
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
+  momentjs-rails (~> 2.9)!
+  nested_form
   omniauth-facebook
   pg
   quiet_assets
