@@ -9,6 +9,7 @@
         <div class="form-inputs">
           <h3>Event infomation</h3>
           <%= f.input :name, required: true, autofocus: true %>
+          <%= f.input :short_description, required: false %>
           <%= f.input :starts_at, required: true, :as => :datetime_picker %>
           <%= f.input :ends_at, required: true, :as => :datetime_picker %>
           <%= f.input :hero_image_url, required: true %>

@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :publish, :update, :my_events]
+
   def index
-    @events = Event.upcoming_events
+    if params[:search]
+      @events = Event.search(params[:search])
+    else
+      @events = Event.upcoming_events
+    end
   end
 
   def my_events
@@ -31,17 +37,44 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    render 'edit'
+    if is_creator(@event)
+      render 'edit'
+    else
+      flash[:warning] = "You do not have permission."
+      redirect_to my_events_path
+    end
   end
 
   def publish
-    @event = Event.find(params[:id])
-    @event.published = true
-    if @event.save
-      flash[:success] = "Event updated successfully"
-      redirect_to my_events_path
+    event = Event.find(params[:id])
+    if is_creator(event)
+    event.published = true
+      if event.save
+        flash[:success] = "Event updated successfully"
+        redirect_to my_events_path
+      else
+        flash[:warning] = "Something went wrong, try again later."
+        redirect_to my_events_path
+      end
     else
-      flash[:warning] = "Something went wrong, try again later."
+      flash[:warning] = "You do not have permission."
+      redirect_to my_events_path
+    end
+  end
+
+  def update
+    event = Event.find(params[:id])
+    if is_creator(event)
+      event.update_attributes!(event_params)
+      if event.save
+        flash[:success] = "Event updated successfully"
+        redirect_to my_events_path
+      else
+        flash[:warning] = "Something went wrong, try again later."
+        redirect_to my_events_path
+      end
+    else
+      flash[:warning] = "You do not have permission."
       redirect_to my_events_path
     end
   end
@@ -49,9 +82,11 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :starts_at, :ends_at, :extended_html_description, :category_id,:user_id,
-                                    :hero_image_url,
-                                    ticket_types_attributes:[:id, :name, :price,:max_quantity,:_destroy],
-                                    venue_attributes:[:name, :region_id])
+    params.require(:event).permit(:name, :short_description, :starts_at, :ends_at, :extended_html_description, :category_id,:user_id, :hero_image_url,
+                                    ticket_types_attributes:[:id, :name, :price,:max_quantity,:_destroy], venue_attributes:[:name, :region_id])
+  end
+
+  def is_creator(event)
+    return event.user_id == current_user.id
   end
 end

@@ -3,12 +3,13 @@
     <div class="col-sm-4 col-sm-offset-4">
       <h2>Create new event</h2>
 
-      <%= simple_nested_form_for (@event) do |f| %>
+      <%= simple_nested_form_for @event, :method => :put do |f| %>
         <%= f.error_notification %>
 
         <div class="form-inputs">
           <h3>Event infomation</h3>
           <%= f.input :name, required: true, autofocus: true %>
+          <%= f.input :short_description, required: false %>
           <%= f.input :starts_at, required: true, :as => :datetime_picker %>
           <%= f.input :ends_at, required: true, :as => :datetime_picker %>
           <%= f.input :hero_image_url, required: true %>
@@ -32,7 +33,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Create" %>
+          <%= f.button :submit, "Update" %>
           <%= link_to 'Publish', publish_path(id: @event.id), class: 'btn btn-success' %>
         </div>
       <% end %>

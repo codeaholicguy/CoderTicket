@@ -16,4 +16,8 @@ class Event < ActiveRecord::Base
   def self.upcoming_events
   	where("starts_at > ? AND published = ?", Time.now, true)
   end
+
+  def self.search(keyword)
+  	where("starts_at > ? AND published = ? AND (name LIKE ? OR short_description LIKE ?)", Time.now, true, "%" + keyword + "%", "%" + keyword + "%")
+  end
 end
