@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use pg as the database for Active Record
@@ -30,12 +30,12 @@ gem 'bootstrap', '~> 4.0.0.alpha1'
 gem 'simple_form'
 gem 'quiet_assets'
 gem 'font-awesome-rails'
-gem 'simplecov', :require => false, :group => :test
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem "nested_form"
+gem 'pg_search'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -46,7 +46,8 @@ gem "nested_form"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
@@ -56,4 +57,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'faker'
+  gem 'simplecov', :require => false
 end
