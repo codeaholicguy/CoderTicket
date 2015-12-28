@@ -46,7 +46,7 @@ gem 'pg_search'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'guard-rspec', require: false
 end
 
@@ -63,4 +63,5 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'faker'
   gem 'simplecov', :require => false
+  gem 'capybara'
 end
