@@ -8,7 +8,7 @@ Time spent: **24** hours
 
 URL: **https://boiling-peak-8930.herokuapp.com/**
 
-SimpleCov Test Coverage: **Insert percentage or link to report here**
+SimpleCov Test Coverage: **https://circle-artifacts.com/gh/codeaholicguy/CoderTicket/22/artifacts/0/tmp/circle-artifacts.n2cKOKe/coverage/index.html#_AllFiles**
 
 ## User Stories
 
